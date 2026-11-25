@@ -1,6 +1,8 @@
 **1. AgriGuard — AI-Powered Smart Agriculture System**
+
 **Project Overviewp**
 AgriGuard (Agriculture Guard) is an Artificial Intelligence (AI) and Internet of Things (IoT)-based smart agriculture system designed to help small and medium-sized Egyptian farmers use water more efficiently, make informed irrigation decisions, and monitor crop health. We chose to address challenges that directly affect agriculture, including water scarcity, inefficient irrigation, and the difficulty of identifying potential crop diseases early. Our goal was to develop a practical prototype that brings together smart monitoring, AI-based predictions, and automated irrigation, with the long-term vision of developing it into a solution that could be used in real agricultural settings.
+
 **What We Built**
 Our team developed an integrated prototype made up of several connected components:
 Smart Agricultural Monitoring: Used ESP32 microcontroller boards and sensors to collect information about soil moisture, temperature, humidity, light intensity, soil nutrients (Nitrogen, Phosphorus, and Potassium — NPK), and water flow. These readings provide a clearer picture of field conditions.
