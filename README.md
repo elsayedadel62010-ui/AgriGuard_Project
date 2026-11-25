@@ -1,0 +1,12 @@
+1. AgriGuard — AI-Powered Smart Agriculture System
+Project Overviewp
+AgriGuard (Agriculture Guard) is an Artificial Intelligence (AI) and Internet of Things (IoT)-based smart agriculture system designed to help small and medium-sized Egyptian farmers use water more efficiently, make informed irrigation decisions, and monitor crop health. We chose to address challenges that directly affect agriculture, including water scarcity, inefficient irrigation, and the difficulty of identifying potential crop diseases early. Our goal was to develop a practical prototype that brings together smart monitoring, AI-based predictions, and automated irrigation, with the long-term vision of developing it into a solution that could be used in real agricultural settings.
+What We Built
+Our team developed an integrated prototype made up of several connected components:
+Smart Agricultural Monitoring: Used ESP32 microcontroller boards and sensors to collect information about soil moisture, temperature, humidity, light intensity, soil nutrients (Nitrogen, Phosphorus, and Potassium — NPK), and water flow. These readings provide a clearer picture of field conditions.
+AI-Powered Irrigation Prediction: Developed a machine learning model that analyzes sensor readings and historical data to predict when irrigation may be needed, helping farmers make more informed decisions about water use.
+Crop Health Analysis: Integrated an AI image-classification model that distinguishes between healthy crops and crops showing possible signs of disease, supporting earlier identification of potential problems.
+Automated Irrigation Control: Designed control logic to operate water pumps and valves according to irrigation conditions, with local safety mechanisms intended to keep the system operating reliably.
+Data Management: Built a backend using FastAPI, a Python framework that receives and processes information, alongside SQLite, a lightweight database used to store and organize records. These components connect the monitoring system, AI models, and dashboard.
+Monitoring Dashboard: Developed a central web interface where users can view sensor readings, irrigation status, AI predictions, crop alerts, water consumption and savings indicators, and historical records.
+Hardware Simulation: Used Wokwi, an online electronics simulator, to model the ESP32-based hardware and test how sensors, irrigation controls, and other components interact before moving toward physical implementation.
