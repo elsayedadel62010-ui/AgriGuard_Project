@@ -1,0 +1,235 @@
+{
+  "generated_by": "python scripts/make_examples.py",
+  "generated_at": "2026-09-29T18:14:41.858097+00:00",
+  "irrigation_model_trained": true,
+  "irrigation_model_version": "0.2.0",
+  "notes": [
+    "These are real responses from the model files in models/.",
+    "prediction_score is a logistic-regression score, not a calibrated probability of being correct, and it saturates near 0 and 1.",
+    "history_used is false when the three historical features had to be filled with placeholders, which is the case in every example except 'with_sequential_history'. The score is not trustworthy when it is false. It is null when no model was consulted at all, i.e. for a safety guard or the rule-based fallback.",
+    "The 'water now / do not water' decision is score >= 0.35, a threshold tuned on held-out training data. Do not read 0.50 as the cut-off.",
+    "decision_source names what produced the advice: 'model', the two safety guards 'pump_guard'/'water_guard', 'rule_fallback' when no model file is present, and 'rule_fallback_out_of_range' when a client-supplied reading lies outside the range the model was fitted on. In the last case prediction_score is the rule's score on the model's scale, and the model's own extrapolated score appears in reason for diagnosis only. The invariant irrigation_needed == (prediction_score >= decision_threshold) holds on every path, so a backend never needs to special-case the source.",
+    "crop_type is a real model input. The trigger level is crop specific (rice is kept wetter than tomato), and only the trained crops tomato/rice/pepper are validated.",
+    "irrigation_duration_min is always null: AgriGuard has no defensible irrigation-duration model.",
+    "advisory_only is always true - the backend/IoT layer decides what to do with a recommendation."
+  ],
+  "examples": [
+    {
+      "name": "dry_tomato_plot_afternoon",
+      "description": "Mid-afternoon, hot and sunny, soil moisture well below the reference threshold. Expect a recommendation. All four readings sit inside the range the model was trained on.",
+      "endpoint": "POST /v1/predict/irrigation",
+      "request": {
+        "timestamp": "2026-09-27T14:20:00Z",
+        "device_id": "ESP32_01",
+        "plot_id": "PLOT_A",
+        "soil_moisture": 20.0,
+        "temperature": 33.0,
+        "humidity": 42.0,
+        "light": 68000.0,
+        "npk_n": 42.0,
+        "npk_p": 27.0,
+        "npk_k": 51.0,
+        "water_flow": 0.0,
+        "pump_status": 0,
+        "crop_type": "tomato"
+      },
+      "response": {
+        "model": "irrigation",
+        "version": "0.2.0",
+        "prediction": {
+          "irrigation_needed": true,
+          "prediction": "Irrigation Recommended",
+          "prediction_score": 0.917,
+          "irrigation_duration_min": null,
+          "history_used": false,
+          "decision_source": "model",
+          "reason": "logistic-regression score 0.92 >= 0.35; soil_moisture=20, temperature=33, humidity=42, light=68000 | NOTE: no usable history was supplied, so the three historical features are placeholders and the score is not trustworthy (see models/irrigation_metrics.json -> test_metrics_without_history) | no history supplied; soil_moisture_avg_30min is a placeholder; no previous reading; soil_moisture_change is a placeholder; no irrigation history; time_since_last_irrigation_min is a placeholder",
+          "advisory_only": true
+        }
+      }
+    },
+    {
+      "name": "dry_rice_plot_afternoon",
+      "description": "Rice is kept wetter than tomato, so 45 % soil moisture means 'irrigate' here while the same reading on the tomato plot above means 'do not'. This is why the model takes crop_type as an input.",
+      "endpoint": "POST /v1/predict/irrigation",
+      "request": {
+        "timestamp": "2026-09-27T14:20:00Z",
+        "device_id": "ESP32_02",
+        "plot_id": "PLOT_B",
+        "soil_moisture": 45.0,
+        "temperature": 33.0,
+        "humidity": 42.0,
+        "light": 68000.0,
+        "npk_n": null,
+        "npk_p": null,
+        "npk_k": null,
+        "water_flow": 0.0,
+        "pump_status": 0,
+        "crop_type": "rice"
+      },
+      "response": {
+        "model": "irrigation",
+        "version": "0.2.0",
+        "prediction": {
+          "irrigation_needed": true,
+          "prediction": "Irrigation Recommended",
+          "prediction_score": 1.0,
+          "irrigation_duration_min": null,
+          "history_used": false,
+          "decision_source": "model",
+          "reason": "logistic-regression score 1.00 >= 0.35; soil_moisture=45, temperature=33, humidity=42, light=68000 | NOTE: no usable history was supplied, so the three historical features are placeholders and the score is not trustworthy (see models/irrigation_metrics.json -> test_metrics_without_history) | no history supplied; soil_moisture_avg_30min is a placeholder; no previous reading; soil_moisture_change is a placeholder; no irrigation history; time_since_last_irrigation_min is a placeholder",
+          "advisory_only": true
+        }
+      }
+    },
+    {
+      "name": "wet_plot_after_rain",
+      "description": "Soil is wet and it is cool and overcast. Expect no action.",
+      "endpoint": "POST /v1/predict/irrigation",
+      "request": {
+        "timestamp": "2026-09-27T09:05:00Z",
+        "device_id": "ESP32_01",
+        "plot_id": "PLOT_A",
+        "soil_moisture": 68.0,
+        "temperature": 19.0,
+        "humidity": 88.0,
+        "light": 12000.0,
+        "npk_n": null,
+        "npk_p": null,
+        "npk_k": null,
+        "water_flow": 0.0,
+        "pump_status": 0,
+        "crop_type": "tomato"
+      },
+      "response": {
+        "model": "irrigation",
+        "version": "0.2.0",
+        "prediction": {
+          "irrigation_needed": false,
+          "prediction": "Irrigation Not Needed",
+          "prediction_score": 0.0,
+          "irrigation_duration_min": null,
+          "history_used": false,
+          "decision_source": "model",
+          "reason": "logistic-regression score 0.00 < 0.35; soil_moisture=68, temperature=19, humidity=88, light=12000 | NOTE: no usable history was supplied, so the three historical features are placeholders and the score is not trustworthy (see models/irrigation_metrics.json -> test_metrics_without_history) | no history supplied; soil_moisture_avg_30min is a placeholder; no previous reading; soil_moisture_change is a placeholder; no irrigation history; time_since_last_irrigation_min is a placeholder",
+          "advisory_only": true
+        }
+      }
+    },
+    {
+      "name": "pump_already_running",
+      "description": "The soil is dry but the pump is on. The model must not ask for a second irrigation.",
+      "endpoint": "POST /v1/predict/irrigation",
+      "request": {
+        "timestamp": "2026-09-27T14:20:00Z",
+        "device_id": "ESP32_02",
+        "plot_id": "PLOT_B",
+        "soil_moisture": 20.0,
+        "temperature": 33.0,
+        "humidity": 42.0,
+        "light": 68000.0,
+        "npk_n": null,
+        "npk_p": null,
+        "npk_k": null,
+        "water_flow": 5.8,
+        "pump_status": 1,
+        "crop_type": "rice"
+      },
+      "response": {
+        "model": "irrigation",
+        "version": "0.2.0",
+        "prediction": {
+          "irrigation_needed": false,
+          "prediction": "Irrigation Not Needed",
+          "prediction_score": 0.0,
+          "irrigation_duration_min": null,
+          "history_used": null,
+          "decision_source": "pump_guard",
+          "reason": "pump already running (pump_status=1)",
+          "advisory_only": true
+        }
+      }
+    },
+    {
+      "name": "with_sequential_history",
+      "description": "Same reading as the first example but the backend also sent the last 30 minutes of readings, so the three historical features are real instead of placeholders. The score comes out LOWER than the history-less case (0.72 against 0.92) and both still recommend irrigation: the 30-minute average is 22.65 %, wetter than the 20 % now, and the model reads a wetter average as 'recently watered'. History is not a one-way lever - compare this with the boundary table in docs/model_results_and_tests.md.",
+      "endpoint": "POST /v1/predict/irrigation",
+      "request": {
+        "timestamp": "2026-09-27T14:20:00Z",
+        "device_id": "ESP32_01",
+        "plot_id": "PLOT_A",
+        "soil_moisture": 20.0,
+        "temperature": 33.0,
+        "humidity": 42.0,
+        "light": 68000.0,
+        "npk_n": 42.0,
+        "npk_p": 27.0,
+        "npk_k": 51.0,
+        "water_flow": 0.0,
+        "pump_status": 0,
+        "crop_type": "tomato",
+        "history": {
+          "recent_soil_moisture": [
+            {
+              "timestamp": "2026-09-27T14:00:00Z",
+              "soil_moisture": 23.4
+            },
+            {
+              "timestamp": "2026-09-27T14:10:00Z",
+              "soil_moisture": 21.9
+            }
+          ],
+          "last_irrigation_at": "2026-09-27T06:40:00Z"
+        }
+      },
+      "response": {
+        "model": "irrigation",
+        "version": "0.2.0",
+        "prediction": {
+          "irrigation_needed": true,
+          "prediction": "Irrigation Recommended",
+          "prediction_score": 0.717,
+          "irrigation_duration_min": null,
+          "history_used": true,
+          "decision_source": "model",
+          "reason": "logistic-regression score 0.72 >= 0.35; soil_moisture=20, temperature=33, humidity=42, light=68000",
+          "advisory_only": true
+        }
+      }
+    },
+    {
+      "name": "weather_outside_the_training_range",
+      "description": "A reading the model was never fitted on. The fitted light coefficient is negative, so a linear model extrapolates a bright, cold, dry reading into a confident 'do not irrigate' - even at 16 % soil moisture, well past the tomato trigger. Any reading outside the recorded training range therefore hands the decision to the crop threshold rule, and the response says so instead of quoting a score nobody should act on.",
+      "endpoint": "POST /v1/predict/irrigation",
+      "request": {
+        "timestamp": "2026-09-27T14:20:00Z",
+        "device_id": "ESP32_03",
+        "plot_id": "PLOT_C",
+        "soil_moisture": 16.0,
+        "temperature": -10.0,
+        "humidity": 0.0,
+        "light": 200000.0,
+        "npk_n": null,
+        "npk_p": null,
+        "npk_k": null,
+        "water_flow": 0.0,
+        "pump_status": 0,
+        "crop_type": "tomato"
+      },
+      "response": {
+        "model": "irrigation",
+        "version": "0.2.0",
+        "prediction": {
+          "irrigation_needed": true,
+          "prediction": "Irrigation Recommended",
+          "prediction_score": 0.53,
+          "irrigation_duration_min": null,
+          "history_used": false,
+          "decision_source": "rule_fallback_out_of_range",
+          "reason": "OUT OF TRAINING RANGE: temperature=-10 (trained 12.83..35.22), humidity=0 (trained 38.49..97.05), light=200000 (trained 0..84562.1). The model extrapolates outside the readings it was fitted on; it would have scored 0.08 against a threshold of 0.35, and that is reported here for diagnosis only. prediction_score (0.53) and the decision both come from the crop threshold rule. | NOTE: no usable history was supplied, so the three historical features are placeholders and the score is not trustworthy (see models/irrigation_metrics.json -> test_metrics_without_history) | no history supplied; soil_moisture_avg_30min is a placeholder; no previous reading; soil_moisture_change is a placeholder; no irrigation history; time_since_last_irrigation_min is a placeholder",
+          "advisory_only": true
+        }
+      }
+    }
+  ]
+}

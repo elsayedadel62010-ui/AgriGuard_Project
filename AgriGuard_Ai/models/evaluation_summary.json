@@ -1,0 +1,87 @@
+{
+  "note": "All numbers are measured by scripts/evaluate_models.py on the data in this repository. The irrigation dataset is SYNTHETIC; the crop-health images come from PlantVillage, a laboratory dataset. Neither number is a real-world field accuracy.",
+  "irrigation": {
+    "test_samples": 2592,
+    "test_positives": 222,
+    "decision_threshold": 0.35,
+    "accuracy": 0.9406,
+    "balanced_accuracy": 0.8144,
+    "precision": 0.6504,
+    "recall": 0.6622,
+    "f1": 0.6562,
+    "majority_class_baseline_accuracy": 0.9144,
+    "at_threshold_0_50": {
+      "accuracy": 0.9444,
+      "balanced_accuracy": 0.7226,
+      "precision": 0.8145,
+      "recall": 0.455
+    },
+    "confusion_matrix": {
+      "labels": [
+        0,
+        1
+      ],
+      "values": [
+        [
+          2291,
+          79
+        ],
+        [
+          75,
+          147
+        ]
+      ],
+      "tn": 2291,
+      "fp": 79,
+      "fn": 75,
+      "tp": 147
+    }
+  },
+  "crop_health": {
+    "test_samples": 846,
+    "accuracy": 0.9657,
+    "balanced_accuracy": 0.9668,
+    "precision_per_class": {
+      "Healthy": 0.9242,
+      "Possible Disease": 0.9859
+    },
+    "recall_per_class": {
+      "Healthy": 0.9697,
+      "Possible Disease": 0.9639
+    },
+    "f1_per_class": {
+      "Healthy": 0.9464,
+      "Possible Disease": 0.9748
+    },
+    "support_per_class": {
+      "Healthy": 264,
+      "Possible Disease": 582
+    },
+    "macro_precision": 0.9551,
+    "macro_recall": 0.9668,
+    "macro_f1": 0.9606,
+    "confusion_matrix": {
+      "labels": [
+        "Healthy",
+        "Possible Disease"
+      ],
+      "rows": "true class",
+      "values": [
+        [
+          256,
+          8
+        ],
+        [
+          21,
+          561
+        ]
+      ],
+      "tn": 256,
+      "fp": 8,
+      "fn": 21,
+      "tp": 561
+    },
+    "mean_confidence": 0.9658,
+    "color_heuristic_baseline_accuracy": 0.4208
+  }
+}

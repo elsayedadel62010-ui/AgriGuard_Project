@@ -1,0 +1,171 @@
+{
+  "model": "crop-health",
+  "method": "MobileNetV3-Small",
+  "model_version": "0.2.0",
+  "trained_at": "2026-09-27T21:48:52.692628+00:00",
+  "training_dataset": "PlantVillage color images (public, see docs/crop_health_dataset.md)",
+  "classes": [
+    "healthy",
+    "possible_disease"
+  ],
+  "class_labels": {
+    "healthy": "Healthy",
+    "possible_disease": "Possible Disease"
+  },
+  "features": {
+    "input_type": "image",
+    "colour_space": "RGB",
+    "image_size": [
+      224,
+      224
+    ],
+    "scale": "0..1",
+    "normalisation_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "normalisation_std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "learned_features": "32x downsampled convolutional embedding learned by training; not a fixed, named feature vector",
+    "classifier_input": "pooled convolutional embedding -> linear(2)"
+  },
+  "image_size": 224,
+  "batch_size": 32,
+  "epochs": 6,
+  "head_epochs_frozen_backbone": 2,
+  "learning_rate_stage2": 0.0003,
+  "seed": 42,
+  "parameters_total": 1519906,
+  "parameters_trainable_last_stage": 943442,
+  "dataset_counts": {
+    "train": {
+      "total": 3947,
+      "healthy": 1220,
+      "possible_disease": 2727
+    },
+    "validation": {
+      "total": 846,
+      "healthy": 255,
+      "possible_disease": 591
+    },
+    "test": {
+      "total": 846,
+      "healthy": 264,
+      "possible_disease": 582
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "stage": "frozen-backbone",
+      "train_loss": 0.2471,
+      "train_accuracy": 0.9002,
+      "val_loss": 0.7815,
+      "val_accuracy": 0.7317,
+      "seconds": 267.9
+    },
+    {
+      "epoch": 2,
+      "stage": "frozen-backbone",
+      "train_loss": 0.1495,
+      "train_accuracy": 0.944,
+      "val_loss": 0.1025,
+      "val_accuracy": 0.961,
+      "seconds": 278.3
+    },
+    {
+      "epoch": 3,
+      "stage": "fine-tune",
+      "train_loss": 0.1151,
+      "train_accuracy": 0.9546,
+      "val_loss": 0.0618,
+      "val_accuracy": 0.9823,
+      "seconds": 293.6
+    },
+    {
+      "epoch": 4,
+      "stage": "fine-tune",
+      "train_loss": 0.093,
+      "train_accuracy": 0.9648,
+      "val_loss": 0.0882,
+      "val_accuracy": 0.9704,
+      "seconds": 271.7
+    },
+    {
+      "epoch": 5,
+      "stage": "fine-tune",
+      "train_loss": 0.0791,
+      "train_accuracy": 0.9683,
+      "val_loss": 0.07,
+      "val_accuracy": 0.9775,
+      "seconds": 271.8
+    },
+    {
+      "epoch": 6,
+      "stage": "fine-tune",
+      "train_loss": 0.0527,
+      "train_accuracy": 0.9802,
+      "val_loss": 0.0598,
+      "val_accuracy": 0.9775,
+      "seconds": 220.4
+    }
+  ],
+  "best_validation_accuracy": 0.9823,
+  "test_metrics": {
+    "test_samples": 846,
+    "accuracy": 0.9657,
+    "balanced_accuracy": 0.9668,
+    "precision_per_class": {
+      "Healthy": 0.9242,
+      "Possible Disease": 0.9859
+    },
+    "recall_per_class": {
+      "Healthy": 0.9697,
+      "Possible Disease": 0.9639
+    },
+    "f1_per_class": {
+      "Healthy": 0.9464,
+      "Possible Disease": 0.9748
+    },
+    "support_per_class": {
+      "Healthy": 264,
+      "Possible Disease": 582
+    },
+    "macro_precision": 0.9551,
+    "macro_recall": 0.9668,
+    "macro_f1": 0.9606,
+    "confusion_matrix": {
+      "labels": [
+        "Healthy",
+        "Possible Disease"
+      ],
+      "rows": "true class",
+      "values": [
+        [
+          256,
+          8
+        ],
+        [
+          21,
+          561
+        ]
+      ],
+      "tn": 256,
+      "fp": 8,
+      "fn": 21,
+      "tp": 561
+    },
+    "mean_confidence": 0.9658
+  },
+  "limitations": [
+    "Two-class screening model: Healthy vs Possible Disease. It never identifies which disease is present and is not a diagnostic system.",
+    "PlantVillage images are single leaves on plain laboratory backgrounds. ESP32-CAM field photos with soil, shadows and mixed lighting are a different domain and will score lower.",
+    "Class balance is 31% Healthy / 69% Possible Disease, so the raw confidence is not a calibrated probability.",
+    "38 original PlantVillage classes were collapsed into 2 categories; many different diseases share the 'Possible Disease' label.",
+    "A high score here must not be read as real-world field accuracy."
+  ]
+}

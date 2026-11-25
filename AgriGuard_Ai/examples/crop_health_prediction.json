@@ -1,0 +1,109 @@
+{
+  "generated_by": "python scripts/make_examples.py",
+  "generated_at": "2026-09-29T18:14:42.059981+00:00",
+  "crop_health_model_trained": true,
+  "crop_health_model_version": "0.2.0",
+  "notes": [
+    "Real responses from the trained MobileNetV3-Small in models/.",
+    "confidence is an uncalibrated softmax score, not a guarantee.",
+    "The model separates Healthy from Possible Disease only. It does not name a disease."
+  ],
+  "examples": [
+    {
+      "name": "unseen_test_image_test_healthy",
+      "description": "Real PlantVillage image from the test split (original class: Blueberry___healthy). The CNN never saw this image during training.",
+      "endpoint": "POST /v1/predict/crop-health",
+      "request": {
+        "content_type": "multipart/form-data",
+        "field": "image",
+        "filename": "blueberry___healthy__00296.jpg",
+        "bytes": 30564
+      },
+      "ground_truth": "healthy",
+      "correct": true,
+      "response": {
+        "model": "crop-health",
+        "version": "0.2.0",
+        "prediction": {
+          "class": "healthy",
+          "label": "Healthy",
+          "confidence": 0.9989,
+          "method": "MobileNetV3-Small",
+          "model_version": "0.2.0"
+        }
+      }
+    },
+    {
+      "name": "unseen_test_image_test_healthy",
+      "description": "Real PlantVillage image from the test split (original class: Raspberry___healthy). The CNN never saw this image during training.",
+      "endpoint": "POST /v1/predict/crop-health",
+      "request": {
+        "content_type": "multipart/form-data",
+        "field": "image",
+        "filename": "raspberry___healthy__05286.jpg",
+        "bytes": 25132
+      },
+      "ground_truth": "healthy",
+      "correct": true,
+      "response": {
+        "model": "crop-health",
+        "version": "0.2.0",
+        "prediction": {
+          "class": "healthy",
+          "label": "Healthy",
+          "confidence": 0.999,
+          "method": "MobileNetV3-Small",
+          "model_version": "0.2.0"
+        }
+      }
+    },
+    {
+      "name": "unseen_test_image_test_possible_disease",
+      "description": "Real PlantVillage image from the test split (original class: Apple__Cedar_apple_rust). The CNN never saw this image during training.",
+      "endpoint": "POST /v1/predict/crop-health",
+      "request": {
+        "content_type": "multipart/form-data",
+        "field": "image",
+        "filename": "apple__cedar_apple_rust__04529.jpg",
+        "bytes": 14113
+      },
+      "ground_truth": "possible_disease",
+      "correct": true,
+      "response": {
+        "model": "crop-health",
+        "version": "0.2.0",
+        "prediction": {
+          "class": "possible_disease",
+          "label": "Possible Disease",
+          "confidence": 1.0,
+          "method": "MobileNetV3-Small",
+          "model_version": "0.2.0"
+        }
+      }
+    },
+    {
+      "name": "unseen_test_image_test_possible_disease",
+      "description": "Real PlantVillage image from the test split (original class: Cherry_(including_sour)___Powdery_mildew). The CNN never saw this image during training.",
+      "endpoint": "POST /v1/predict/crop-health",
+      "request": {
+        "content_type": "multipart/form-data",
+        "field": "image",
+        "filename": "cherry__including_sour____powdery_mildew__00427.jpg",
+        "bytes": 11220
+      },
+      "ground_truth": "possible_disease",
+      "correct": true,
+      "response": {
+        "model": "crop-health",
+        "version": "0.2.0",
+        "prediction": {
+          "class": "possible_disease",
+          "label": "Possible Disease",
+          "confidence": 0.9996,
+          "method": "MobileNetV3-Small",
+          "model_version": "0.2.0"
+        }
+      }
+    }
+  ]
+}

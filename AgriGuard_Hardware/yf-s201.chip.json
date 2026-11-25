@@ -1,0 +1,19 @@
+{
+  "name": "yf-s201",
+  "author": "AgriGuard",
+  "pins": [
+    "VCC",
+    "GND",
+    "OUT"
+  ],
+  "controls": [
+    {
+      "id": "flowRate",
+      "label": "Flow Rate (L/min)",
+      "type": "slider",
+      "min": 0,
+      "max": 30,
+      "value": 0
+    }
+  ]
+}

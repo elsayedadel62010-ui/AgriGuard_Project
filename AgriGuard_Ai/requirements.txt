@@ -1,0 +1,48 @@
+# AgriGuard AI - runtime + training dependencies
+#
+# Install everything:
+#     pip install -r requirements.txt
+#
+# PyTorch is installed from the CPU wheel index by default because the AgriGuard
+# prototype trains on a laptop. If you have an NVIDIA GPU, install the CUDA build
+# first and then run this file:
+#     pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#     pip install -r requirements.txt
+#
+# Versions are lower-bounded rather than hard-pinned so the file keeps working
+# across Python 3.10-3.12. Verified on Python 3.11.
+
+# --- AI service ---
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+python-multipart>=0.0.9
+
+# --- Irrigation model (training + inference) ---
+numpy>=1.26
+pandas>=2.0
+scikit-learn>=1.3
+
+# --- Crop-health model (training + inference) ---
+torch>=2.2
+torchvision>=0.17
+Pillow>=10.0
+
+# --- Crop-health dataset preparation ---
+# scripts/prepare_crop_dataset.py reads the PlantVillage parquet shards and
+# writes image shards, so pyarrow is required for that one step. It is not
+# needed to run the API or the trained models.
+pyarrow>=14.0
+
+# --- Exploratory analysis (scripts/eda.py) ---
+# Not needed to run the API or to train or use either model. Both are imported
+# defensively: without scipy the hypothesis tests are skipped and the report
+# says so, without matplotlib the figures are skipped and the text report is
+# unaffected. Declared so that `pip install -r requirements.txt` reproduces the
+# full report instead of silently producing a thinner one.
+scipy>=1.11          # p-values for the correlation, Mann-Whitney and chi-square tests
+matplotlib>=3.7      # correlation heatmap and class-balance figures (headless Agg)
+
+# --- Tests ---
+pytest>=8.0
+httpx>=0.27

@@ -1,0 +1,38 @@
+# --- AgriGuard AI -----------------------------------------------------------
+# The prepared image dataset and the parquet cache are reproducible artefacts.
+# Re-create them with scripts/prepare_crop_dataset.py instead of committing
+# ~115 MB of images.
+data/crop_health/
+.cache/
+
+# The irrigation CSV is synthetic and regenerable with
+# scripts/generate_irrigation_data.py. Drop this line if you want the sample
+# dataset in the repository.
+data/irrigation_data.csv
+
+# Generated evidence transcripts - regenerate with scripts/make_evidence.py.
+evidence/
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Release archives built by scripts/package_release.py
+dist/
+
+# --- model artefacts ---------------------------------------------------------
+# The crop-health weights are ~10 MB and are produced by
+# scripts/train_crophealth.py. The irrigation model is a small JSON file and is
+# tracked on purpose, because the API falls back to rules without it.
+# Uncomment if you do not want the weights in the repository:
+# models/*.pth
+
+# --- editors / OS ------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

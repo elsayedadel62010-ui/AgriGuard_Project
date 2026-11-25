@@ -1,0 +1,510 @@
+{
+  "generated_by": "scripts/eda.py",
+  "alpha": 0.05,
+  "bootstrap_samples": 10000,
+  "irrigation": {
+    "n_rows_raw": 12960,
+    "n_rows": 12960,
+    "n_columns": 17,
+    "n_model_features": 7,
+    "positive_rate": 0.08557098765432099,
+    "cleaning": {
+      "rows_in": 12960,
+      "rows_bad_timestamp": 0,
+      "rows_dropped": 0,
+      "values_clipped": 0,
+      "rows_out": 12960
+    },
+    "n_dropped": 0,
+    "n_clipped": 0,
+    "outlier_order": [
+      "soil_moisture",
+      "soil_moisture_change",
+      "soil_moisture_avg_30min",
+      "time_since_last_irrigation_min",
+      "temperature",
+      "humidity",
+      "light"
+    ],
+    "outliers": {
+      "soil_moisture": {
+        "min": 13.76,
+        "q1": 26.61,
+        "median": 33.31,
+        "q3": 60.01,
+        "max": 77.31,
+        "mean": 40.712263888888884,
+        "std": 17.564660227115464,
+        "skew": 0.6106614150438864,
+        "iqr_low_fence": -23.489999999999995,
+        "iqr_high_fence": 110.10999999999999,
+        "count_below_iqr_fence": 0,
+        "count_above_iqr_fence": 0,
+        "count_abs_z_over_3": 0
+      },
+      "soil_moisture_change": {
+        "min": -8.61,
+        "q1": -1.9199999999999982,
+        "median": -0.4299999999999997,
+        "q3": 1.5600000000000023,
+        "max": 9.880000000000003,
+        "mean": -0.0012654320987654337,
+        "std": 2.826399448257025,
+        "skew": 0.539466123821375,
+        "iqr_low_fence": -7.139999999999999,
+        "iqr_high_fence": 6.780000000000003,
+        "count_below_iqr_fence": 15,
+        "count_above_iqr_fence": 188,
+        "count_abs_z_over_3": 27
+      },
+      "soil_moisture_avg_30min": {
+        "min": 16.876666666666665,
+        "q1": 26.49249999999999,
+        "median": 33.19333333333333,
+        "q3": 60.138333333333286,
+        "max": 75.01333333333329,
+        "mean": 40.71347466563785,
+        "std": 17.45589091994536,
+        "skew": 0.623601157560428,
+        "iqr_low_fence": -23.97624999999996,
+        "iqr_high_fence": 110.60708333333324,
+        "count_below_iqr_fence": 0,
+        "count_above_iqr_fence": 0,
+        "count_abs_z_over_3": 0
+      },
+      "time_since_last_irrigation_min": {
+        "min": 0.0,
+        "q1": 0.0,
+        "median": 40.0,
+        "q3": 110.0,
+        "max": 1440.0,
+        "mean": 67.0925925925926,
+        "std": 101.01080650227813,
+        "skew": 8.282710737987937,
+        "iqr_low_fence": -165.0,
+        "iqr_high_fence": 275.0,
+        "count_below_iqr_fence": 0,
+        "count_above_iqr_fence": 42,
+        "count_abs_z_over_3": 42
+      },
+      "temperature": {
+        "min": 12.65,
+        "q1": 17.69,
+        "median": 23.994999999999997,
+        "q3": 30.31,
+        "max": 35.22,
+        "mean": 23.991325617283948,
+        "std": 6.407051861827181,
+        "skew": -0.005508879331813043,
+        "iqr_low_fence": -1.2399999999999949,
+        "iqr_high_fence": 49.239999999999995,
+        "count_below_iqr_fence": 0,
+        "count_above_iqr_fence": 0,
+        "count_abs_z_over_3": 0
+      },
+      "humidity": {
+        "min": 38.49,
+        "q1": 52.74,
+        "median": 68.09,
+        "q3": 83.37,
+        "max": 97.05,
+        "mean": 68.04810108024691,
+        "std": 15.749197306077345,
+        "skew": -0.004189118387344346,
+        "iqr_low_fence": 6.794999999999995,
+        "iqr_high_fence": 129.315,
+        "count_below_iqr_fence": 0,
+        "count_above_iqr_fence": 0,
+        "count_abs_z_over_3": 0
+      },
+      "light": {
+        "min": 0.0,
+        "q1": 0.0,
+        "median": 3653.0,
+        "q3": 48090.6,
+        "max": 84562.1,
+        "mean": 22745.049236111114,
+        "std": 28596.70688195271,
+        "skew": 0.8597171569415004,
+        "iqr_low_fence": -72135.9,
+        "iqr_high_fence": 120226.5,
+        "count_below_iqr_fence": 0,
+        "count_above_iqr_fence": 0,
+        "count_abs_z_over_3": 0
+      }
+    },
+    "correlation_with_target": {
+      "soil_moisture": {
+        "r": -0.13531140798993552,
+        "p": 5.209938101885486e-54,
+        "n": 12960
+      },
+      "soil_moisture_change": {
+        "r": -0.2565627666743012,
+        "p": 6.953655071396264e-194,
+        "n": 12960
+      },
+      "soil_moisture_avg_30min": {
+        "r": -0.0983651043696267,
+        "p": 3.100846598759264e-29,
+        "n": 12960
+      },
+      "time_since_last_irrigation_min": {
+        "r": 0.06989548979748446,
+        "p": 1.6386938138405947e-15,
+        "n": 12960
+      },
+      "temperature": {
+        "r": 0.18676081434024117,
+        "p": 4.7529020332431004e-102,
+        "n": 12960
+      },
+      "humidity": {
+        "r": -0.18664009872046186,
+        "p": 6.4365298819925184e-102,
+        "n": 12960
+      },
+      "light": {
+        "r": 0.22052422682989034,
+        "p": 1.678385371472495e-142,
+        "n": 12960
+      }
+    },
+    "correlation_matrix": {
+      "columns": [
+        "soil_moisture",
+        "soil_moisture_change",
+        "soil_moisture_avg_30min",
+        "time_since_last_irrigation_min",
+        "temperature",
+        "humidity",
+        "light"
+      ],
+      "values": {
+        "soil_moisture": {
+          "soil_moisture": 1.0,
+          "soil_moisture_change": 0.0799,
+          "soil_moisture_avg_30min": 0.9918,
+          "time_since_last_irrigation_min": -0.0299,
+          "temperature": -0.1613,
+          "humidity": 0.1585,
+          "light": -0.1891
+        },
+        "soil_moisture_change": {
+          "soil_moisture": 0.0799,
+          "soil_moisture_change": 1.0,
+          "soil_moisture_avg_30min": -0.0368,
+          "time_since_last_irrigation_min": -0.2151,
+          "temperature": -0.0025,
+          "humidity": 0.0008,
+          "light": -0.0062
+        },
+        "soil_moisture_avg_30min": {
+          "soil_moisture": 0.9918,
+          "soil_moisture_change": -0.0368,
+          "soil_moisture_avg_30min": 1.0,
+          "time_since_last_irrigation_min": 0.0036,
+          "temperature": -0.1619,
+          "humidity": 0.159,
+          "light": -0.189
+        },
+        "time_since_last_irrigation_min": {
+          "soil_moisture": -0.0299,
+          "soil_moisture_change": -0.2151,
+          "soil_moisture_avg_30min": 0.0036,
+          "time_since_last_irrigation_min": 1.0,
+          "temperature": -0.3935,
+          "humidity": 0.3889,
+          "light": -0.3757
+        },
+        "temperature": {
+          "soil_moisture": -0.1613,
+          "soil_moisture_change": -0.0025,
+          "soil_moisture_avg_30min": -0.1619,
+          "time_since_last_irrigation_min": -0.3935,
+          "temperature": 1.0,
+          "humidity": -0.9807,
+          "light": 0.8751
+        },
+        "humidity": {
+          "soil_moisture": 0.1585,
+          "soil_moisture_change": 0.0008,
+          "soil_moisture_avg_30min": 0.159,
+          "time_since_last_irrigation_min": 0.3889,
+          "temperature": -0.9807,
+          "humidity": 1.0,
+          "light": -0.873
+        },
+        "light": {
+          "soil_moisture": -0.1891,
+          "soil_moisture_change": -0.0062,
+          "soil_moisture_avg_30min": -0.189,
+          "time_since_last_irrigation_min": -0.3757,
+          "temperature": 0.8751,
+          "humidity": -0.873,
+          "light": 1.0
+        }
+      }
+    },
+    "cross_validation": {
+      "method": "TimeSeriesSplit(n_splits=5) on the 10-feature pipeline",
+      "why_not_random_folds": "random or stratified folds place later readings in training and earlier ones in validation, which the model never faces at inference; TimeSeriesSplit preserves chronology",
+      "caveat": "consecutive folds share a boundary day, so fold scores are correlated and the reported spread understates true variance",
+      "folds": [
+        {
+          "fold": 1,
+          "n_test": 2160,
+          "accuracy": 0.9421296296296297,
+          "balanced_accuracy": 0.7053714416446056,
+          "precision": 0.8210526315789474,
+          "recall": 0.41935483870967744,
+          "f1": 0.5551601423487544,
+          "positive_rate": 0.08611111111111111
+        },
+        {
+          "fold": 2,
+          "n_test": 2160,
+          "accuracy": 0.9407407407407408,
+          "balanced_accuracy": 0.7177420458433117,
+          "precision": 0.7614678899082569,
+          "recall": 0.4486486486486487,
+          "f1": 0.5646258503401361,
+          "positive_rate": 0.08564814814814815
+        },
+        {
+          "fold": 3,
+          "n_test": 2160,
+          "accuracy": 0.9407407407407408,
+          "balanced_accuracy": 0.7137827847209999,
+          "precision": 0.7641509433962265,
+          "recall": 0.44021739130434784,
+          "f1": 0.5586206896551724,
+          "positive_rate": 0.08518518518518518
+        },
+        {
+          "fold": 4,
+          "n_test": 2160,
+          "accuracy": 0.9439814814814815,
+          "balanced_accuracy": 0.726862812179268,
+          "precision": 0.7962962962962963,
+          "recall": 0.4648648648648649,
+          "f1": 0.5870307167235495,
+          "positive_rate": 0.08564814814814815
+        },
+        {
+          "fold": 5,
+          "n_test": 2160,
+          "accuracy": 0.9444444444444444,
+          "balanced_accuracy": 0.7295655148819706,
+          "precision": 0.7981651376146789,
+          "recall": 0.4702702702702703,
+          "f1": 0.5918367346938777,
+          "positive_rate": 0.08564814814814815
+        }
+      ],
+      "accuracy": {
+        "mean": 0.9424074074074074,
+        "std": 0.0017507102223323096,
+        "min": 0.9407407407407408,
+        "max": 0.9444444444444444
+      },
+      "balanced_accuracy": {
+        "mean": 0.7186649198540312,
+        "std": 0.009841645103089044,
+        "min": 0.7053714416446056,
+        "max": 0.7295655148819706
+      },
+      "precision": {
+        "mean": 0.7882265797588811,
+        "std": 0.025184859956577214,
+        "min": 0.7614678899082569,
+        "max": 0.8210526315789474
+      },
+      "recall": {
+        "mean": 0.4486712027595618,
+        "std": 0.020369530232840737,
+        "min": 0.41935483870967744,
+        "max": 0.4702702702702703
+      },
+      "f1": {
+        "mean": 0.571454826752298,
+        "std": 0.016844118063973575,
+        "min": 0.5551601423487544,
+        "max": 0.5918367346938777
+      },
+      "positive_rate": {
+        "mean": 0.08564814814814815,
+        "std": 0.00032736425054932805,
+        "min": 0.08518518518518518,
+        "max": 0.08611111111111111
+      }
+    },
+    "hypothesis_tests": {
+      "scipy_available": true,
+      "tests": [
+        {
+          "name": "soil moisture is lower when an irrigation is scheduled",
+          "test": "Mann-Whitney U (one-sided, less)",
+          "why_not_t_test": "unequal group sizes and differently shaped moisture distributions; a t-test would assume normality neither group satisfies",
+          "group_event": {
+            "n": 1109,
+            "median": 22.85
+          },
+          "group_no_event": {
+            "n": 11851,
+            "median": 33.7
+          },
+          "statistic": 3355869.5,
+          "p": 1.0097583249756208e-160,
+          "effect_size_rank_biserial": 0.48932039307728303,
+          "significant_at_alpha": true
+        },
+        {
+          "name": "irrigation frequency differs between crops",
+          "test": "chi-square test of independence",
+          "table": {
+            "rows": [
+              "pepper",
+              "rice",
+              "tomato"
+            ],
+            "columns": [
+              "0",
+              "1"
+            ],
+            "counts": [
+              [
+                3983,
+                337
+              ],
+              [
+                3944,
+                376
+              ],
+              [
+                3924,
+                396
+              ]
+            ],
+            "row_positive_rates": {
+              "pepper": 0.07800925925925926,
+              "rice": 0.08703703703703704,
+              "tomato": 0.09166666666666666
+            }
+          },
+          "statistic": 5.326881517039154,
+          "dof": 2,
+          "min_expected_count": 369.6666666666667,
+          "p": 0.06970796038245684,
+          "significant_at_alpha": false
+        }
+      ]
+    }
+  },
+  "crop_health": {
+    "n_images": 5639,
+    "n_categories": 2,
+    "n_original_classes": 38,
+    "category_counts": {
+      "possible_disease": {
+        "count": 3900,
+        "share": 0.6916119879411243
+      },
+      "healthy": {
+        "count": 1739,
+        "share": 0.30838801205887567
+      }
+    },
+    "duplicate_groups": {
+      "n_duplicate_groups": 5629,
+      "n_groups_spanning_multiple_splits": 0,
+      "max_images_in_one_group": 2,
+      "clean": true
+    },
+    "split_balance": {
+      "test": "chi-square test of independence (category x split)",
+      "table": {
+        "rows": [
+          "healthy",
+          "possible_disease"
+        ],
+        "columns": [
+          "test",
+          "train",
+          "validation"
+        ],
+        "counts": [
+          [
+            264,
+            1220,
+            255
+          ],
+          [
+            582,
+            2727,
+            591
+          ]
+        ]
+      },
+      "statistic": 0.2553247033476259,
+      "dof": 2,
+      "min_expected_count": 260.89625820180885,
+      "p": 0.8801505103255021,
+      "significant_at_alpha": false,
+      "reading": "a non-significant result is the desired outcome: it means the train/val/test split did not systematically change the class mix, which is what the duplicate-group split was there to prevent"
+    },
+    "confidence_intervals": {
+      "method": "percentile bootstrap over per-image outcomes, 10000 resamples, seed 0",
+      "n_test_images": 846,
+      "what_this_does_not_cover": "resampling one test set does not capture the variance from a different training draw; that needs k-fold retraining, available via --crop-cv-folds",
+      "intervals": {
+        "accuracy": {
+          "point": 0.9657210401891253,
+          "ci95_low": 0.9527186761229315,
+          "ci95_high": 0.9775413711583925,
+          "bootstrap_samples": 10000
+        },
+        "balanced_accuracy": {
+          "point": 0.9668072477350829,
+          "ci95_low": 0.9532356435006483,
+          "ci95_high": 0.9787912817109897,
+          "bootstrap_samples": 10000
+        },
+        "f1_macro": {
+          "point": 0.9606000407906972,
+          "ci95_low": 0.945813619797501,
+          "ci95_high": 0.9738088604067985,
+          "bootstrap_samples": 10000
+        },
+        "precision_healthy": {
+          "point": 0.924187725631769,
+          "ci95_low": 0.8916945419201737,
+          "ci95_high": 0.953405017921147,
+          "bootstrap_samples": 10000
+        },
+        "recall_healthy": {
+          "point": 0.9696969696969697,
+          "ci95_low": 0.9473684210526315,
+          "ci95_high": 0.9885057471264368,
+          "bootstrap_samples": 10000
+        },
+        "precision_possible_disease": {
+          "point": 0.9859402460456942,
+          "ci95_low": 0.9753521126760564,
+          "ci95_high": 0.9947275922671354,
+          "bootstrap_samples": 10000
+        },
+        "recall_possible_disease": {
+          "point": 0.9639175257731959,
+          "ci95_low": 0.9481865284974094,
+          "ci95_high": 0.9781512605042016,
+          "bootstrap_samples": 10000
+        }
+      }
+    }
+  },
+  "figures": [
+    "docs/figures/irrigation_correlation.png",
+    "docs/figures/crop_class_balance.png"
+  ]
+}
